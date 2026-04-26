@@ -201,21 +201,7 @@ try {
   setThemePreview("light", false);
 }
 
-const sectionObserver = new IntersectionObserver(
-  (entries) => {
-    const visible = entries
-      .filter((entry) => entry.isIntersecting)
-      .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-    if (!visible) return;
-
-    setActiveNavLink(visible.target.id);
-  },
-  { rootMargin: "-30% 0px -55% 0px", threshold: [0.2, 0.45, 0.7] },
-);
-
-document.querySelectorAll("main section[id]").forEach((section) => {
-  sectionObserver.observe(section);
-});
+const guideSections = [...document.querySelectorAll("main section[id]")];
 
 function setActiveNavLink(sectionId) {
   const activeId = sectionId === "cover" ? "essence" : sectionId;
@@ -224,10 +210,37 @@ function setActiveNavLink(sectionId) {
   });
 }
 
+function updateActiveNavFromScroll() {
+  const marker = window.innerHeight * 0.32;
+  let activeSection = guideSections[0];
+
+  guideSections.forEach((section) => {
+    if (section.getBoundingClientRect().top <= marker) {
+      activeSection = section;
+    }
+  });
+
+  if (activeSection) {
+    setActiveNavLink(activeSection.id);
+  }
+}
+
+let activeNavFrame = null;
+function scheduleActiveNavUpdate() {
+  if (activeNavFrame !== null) return;
+  activeNavFrame = window.requestAnimationFrame(() => {
+    activeNavFrame = null;
+    updateActiveNavFromScroll();
+  });
+}
+
 setActiveNavLink(window.location.hash.replace(/^#/, "") || "essence");
+updateActiveNavFromScroll();
 window.addEventListener("hashchange", () => {
   setActiveNavLink(window.location.hash.replace(/^#/, "") || "essence");
 });
+window.addEventListener("scroll", scheduleActiveNavUpdate, { passive: true });
+window.addEventListener("resize", scheduleActiveNavUpdate);
 
 function pathForLogo(file) {
   return `assets/logos/display/${file}`;
