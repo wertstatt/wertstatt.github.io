@@ -1,0 +1,24 @@
+# Local / OS noise
+.DS_Store
+Thumbs.db
+desktop.ini
+.env
+.env.*
+node_modules/
+
+# Temporary local previews and helper files
+.server*
+.chrome*
+.edge*
+
+# Internal project notes, not needed on the public site
+PROJECT_CONTEXT.md
+
+# Source/contact-sheet assets kept locally but not used by the published guide
+assets/logos/preview/
+assets/mockups/generated-contact-sheet.png
+assets/social/wertstatt-og-source.png
+
+# Legacy raster logo previews; SVG files are the source of truth
+assets/logos/display/*.jpg
+downloads/logos/*.jpg
