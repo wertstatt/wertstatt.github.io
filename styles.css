@@ -139,6 +139,7 @@ img {
   border-bottom: 1px solid transparent;
   border-radius: 0;
   color: var(--navy);
+  position: relative;
   padding: 0.56rem 0;
   font-weight: 600;
   text-decoration: none;
@@ -153,17 +154,39 @@ img {
   letter-spacing: inherit;
 }
 
-.sidebar__nav a:hover,
-.sidebar__nav a.is-active {
+.sidebar__nav a:hover {
   border-color: var(--gold);
   background: transparent;
   color: var(--navy-deep);
   transform: none;
 }
 
-.sidebar__nav a:hover::before,
+.sidebar__nav a:hover::before {
+  color: currentColor;
+}
+
+.sidebar__nav a.is-active {
+  border-color: transparent;
+  background-image: var(--gold-gradient);
+  color: #d98407;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  transform: none;
+}
+
 .sidebar__nav a.is-active::before {
   color: currentColor;
+}
+
+.sidebar__nav a.is-active::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 1px;
+  background: var(--gold-gradient);
 }
 
 .language-toggle {
@@ -979,11 +1002,19 @@ html[data-theme-preview="dark"] .theme-toggle__button {
 }
 
 html[data-theme-preview="dark"] .sidebar__nav a:hover,
-html[data-theme-preview="dark"] .sidebar__nav a.is-active,
 html[data-theme-preview="dark"] .language-toggle__button.is-active,
 html[data-theme-preview="dark"] .theme-toggle__button.is-active {
   border-color: var(--gold-light);
   color: #fff;
+}
+
+html[data-theme-preview="dark"] .sidebar__nav a.is-active {
+  border-color: transparent;
+  background-image: var(--gold-gradient);
+  color: #e3ad5d;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 html[data-theme-preview="dark"] .section {

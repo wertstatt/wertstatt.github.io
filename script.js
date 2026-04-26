@@ -208,15 +208,25 @@ const sectionObserver = new IntersectionObserver(
       .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
     if (!visible) return;
 
-    navLinks.forEach((link) => {
-      link.classList.toggle("is-active", link.getAttribute("href") === `#${visible.target.id}`);
-    });
+    setActiveNavLink(visible.target.id);
   },
   { rootMargin: "-30% 0px -55% 0px", threshold: [0.2, 0.45, 0.7] },
 );
 
 document.querySelectorAll("main section[id]").forEach((section) => {
   sectionObserver.observe(section);
+});
+
+function setActiveNavLink(sectionId) {
+  const activeId = sectionId === "cover" ? "essence" : sectionId;
+  navLinks.forEach((link) => {
+    link.classList.toggle("is-active", link.getAttribute("href") === `#${activeId}`);
+  });
+}
+
+setActiveNavLink(window.location.hash.replace(/^#/, "") || "essence");
+window.addEventListener("hashchange", () => {
+  setActiveNavLink(window.location.hash.replace(/^#/, "") || "essence");
 });
 
 function pathForLogo(file) {
