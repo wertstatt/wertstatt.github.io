@@ -42,22 +42,6 @@ const logoDownloads = [
     recommendedDe: "Nur Display-Nutzung",
   },
   {
-    title: "Vertical Combination Invert",
-    titleDe: "Vertikale Kombination invertiert",
-    file: "Vertical Combination invert.svg",
-    recommended: "Conditional dark mode",
-    recommendedDe: "Bedingter Dark Mode",
-    dark: true,
-  },
-  {
-    title: "Horizontal Combination Invert",
-    titleDe: "Horizontale Kombination invertiert",
-    file: "Horizontal Combination invert.svg",
-    recommended: "Conditional dark mode",
-    recommendedDe: "Bedingter Dark Mode",
-    dark: true,
-  },
-  {
     title: "Wordmark Invert",
     titleDe: "Wortmarke invertiert",
     file: "Wordmark only WERTSTATT invert.svg",
